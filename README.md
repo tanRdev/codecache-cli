@@ -36,7 +36,7 @@ Alternative install paths:
 ### Homebrew
 
 ```bash
-brew tap tanRdev/tap
+brew tap tanRdev/homebrew-tap
 brew install codecache-cli
 ```
 
@@ -177,7 +177,7 @@ npm run build
 ## Distribution
 
 - npm package: `codecache-cli`
-- Homebrew formula: `tanRdev/tap/codecache-cli`
+- Homebrew formula: `tanRdev/homebrew-tap/codecache-cli`
 - GitHub releases: binary-installable tarball assets
 
 ## License
