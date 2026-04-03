@@ -4,3 +4,5 @@ node_modules/
 .todos/
 *.tgz
 tmp-*/
+.agents/
+skills-lock.json
