@@ -49,6 +49,16 @@ curl -fsSL https://raw.githubusercontent.com/tanRdev/codecache-cli/main/scripts/
 
 The installer downloads the latest GitHub release tarball and installs `cache` into `~/.local/bin` by default.
 
+### Agent skill
+
+Install the reusable skill for AI agents through `skills.sh`:
+
+```bash
+npx skills add https://github.com/tanRdev/codecache-cli --skill codecache-cli
+```
+
+This gives your coding agent native capabilities for storing, searching, and managing snippets in the local vault.
+
 ## Quick Start
 
 Initialize a vault and save it as the default:
