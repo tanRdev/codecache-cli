@@ -1,5 +1,10 @@
 # codecache-cli
 
+[![GitHub Release](https://img.shields.io/github/v/release/tanRdev/codecache-cli?label=release)](https://github.com/tanRdev/codecache-cli/releases)
+[![Homebrew Tap](https://img.shields.io/badge/homebrew-tanRdev%2Fhomebrew--tap-brightgreen)](https://github.com/tanRdev/homebrew-tap)
+[![Curl Install](https://img.shields.io/badge/curl-installer-blue)](https://github.com/tanRdev/codecache-cli/blob/main/scripts/install.sh)
+[![License](https://img.shields.io/github/license/tanRdev/codecache-cli)](./LICENSE)
+
 Local-first CLI for storing and retrieving code snippets in a SQLite vault.
 
 `codecache-cli` is built for humans and coding agents that need a simple local snippet database with a stable CLI, machine-friendly output, and no hosted service dependency.
@@ -25,13 +30,9 @@ Local-first CLI for storing and retrieving code snippets in a SQLite vault.
 
 ## Install
 
-```bash
-npm install -g codecache-cli
-```
-
 After install, the command is `cache`.
 
-Alternative install paths:
+Install paths:
 
 ### Homebrew
 
@@ -165,18 +166,8 @@ Recommended agent patterns:
 - use `--raw` when you need only snippet code
 - pass `--vault PATH` explicitly in multi-project automation
 
-## Development
-
-```bash
-npm install
-npm test
-npm run typecheck
-npm run build
-```
-
 ## Distribution
 
-- npm package: `codecache-cli`
 - Homebrew formula: `tanRdev/homebrew-tap/codecache-cli`
 - GitHub releases: binary-installable tarball assets
 
