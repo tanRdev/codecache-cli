@@ -15,6 +15,7 @@ import type {
   UpdateSnippetInput,
 } from "../shared/types";
 import { resolvePath } from "../shared/paths";
+import { createPromptSession, isInteractiveSession } from "./interactive";
 
 interface ParsedArgs {
   flags: Map<string, string[]>;
@@ -166,6 +167,38 @@ async function handleSnippet(args: ParsedArgs, alias?: "create" | "search" | "ge
 
   if (subcommand === "create") {
     const source = args.positionals[2];
+
+    if (!source && isInteractiveSession()) {
+      const prompt = createPromptSession();
+
+      try {
+        const title = await prompt.ask("Title", "Untitled snippet");
+        const language = await prompt.ask("Language", "text");
+        const description = await prompt.ask("Description", "");
+        const notes = await prompt.ask("Notes", "");
+        const tagsValue = await prompt.ask("Tags (comma-separated)", "");
+        const code = await prompt.askMultiline("Paste snippet code", ".");
+        const interactiveInput: CreateSnippetInput = {
+          title,
+          language,
+          code,
+          tags: tagsValue ? tagsValue.split(",").map((tag: string) => tag.trim()).filter(Boolean) : [],
+        };
+
+        if (description) {
+          interactiveInput.description = description;
+        }
+
+        if (notes) {
+          interactiveInput.notes = notes;
+        }
+
+        return snippets.create(interactiveInput);
+      } finally {
+        prompt.close();
+      }
+    }
+
     const code = await readSource(source);
     const title = getFlag(args, "title") ?? (source && source !== "-" ? path.basename(source) : "stdin-snippet");
     const input: CreateSnippetInput = {
@@ -475,6 +508,12 @@ export async function runCli(argv: string[]): Promise<CommandResult<unknown>> {
 }
 
 export async function main(argv = process.argv) {
+  if (argv.slice(2).length === 0 && isInteractiveSession()) {
+    const { runInteractiveShell } = await import("./interactive-shell");
+    await runInteractiveShell();
+    return;
+  }
+
   const args = parseArgs(argv.slice(2));
   const format = resolveOutputFormat(getFlag(args, "format"), Boolean(process.stdout.isTTY));
   const result = await runCli(argv.slice(2));

@@ -1,6 +1,6 @@
 {
   "name": "codecache-cli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Local-first CLI for storing and retrieving code snippets.",
   "license": "MIT",
   "bin": {

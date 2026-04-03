@@ -5,3 +5,4 @@ if (require.main === module) {
 }
 
 export { main };
+export { runCli } from "./cli/program";
