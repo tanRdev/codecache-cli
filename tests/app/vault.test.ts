@@ -7,7 +7,7 @@ import {
   readSavedDefaultVault,
   resolveVaultPath,
   saveDefaultVault,
-} from "@/app/vault";
+} from "../../src/app/vault";
 
 describe("vault resolution", () => {
   const originalEnv = { ...process.env };

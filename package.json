@@ -1,6 +1,6 @@
 {
   "name": "codecache-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Local-first CLI for storing and retrieving code snippets.",
   "license": "MIT",
   "bin": {
@@ -25,12 +25,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "verify": "npm run typecheck && npm run test && npm run build"
   },
-  "_moduleAliases": {
-    "@": "dist"
-  },
-  "dependencies": {
-    "module-alias": "^2.2.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^24.12.0",
     "typescript": "^5.9.3",

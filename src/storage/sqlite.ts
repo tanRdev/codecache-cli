@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import type { ListSnippetsInput, SnippetRecord, UpdateSnippetInput } from "@/shared/types";
-import { normalizeTags } from "@/shared/tags";
+import type { ListSnippetsInput, SnippetRecord, UpdateSnippetInput } from "../shared/types";
+import { normalizeTags } from "../shared/tags";
 
 type SnippetRow = {
   id: string;

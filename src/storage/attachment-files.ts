@@ -1,6 +1,6 @@
 import path from "node:path";
 import { copyFile, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
-import type { VaultDatabase } from "@/storage/sqlite";
+import type { VaultDatabase } from "./sqlite";
 
 function sanitizeFileName(fileName: string) {
   return fileName.replace(/[^a-zA-Z0-9._-]/g, "-");

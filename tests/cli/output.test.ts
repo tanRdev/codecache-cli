@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { printSuccess, renderSuccess, resolveOutputFormat } from "@/cli/output";
+import { printSuccess, renderSuccess, resolveOutputFormat } from "../../src/cli/output";
 
 describe("cli output", () => {
   afterEach(() => {

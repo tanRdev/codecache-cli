@@ -2,10 +2,10 @@ import os from "node:os";
 import path from "node:path";
 import { access, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { runCli } from "@/cli/program";
-import { createAttachmentService } from "@/app/attachments";
-import { createSnippetService } from "@/app/snippets";
-import { openVaultDatabase } from "@/storage/sqlite";
+import { runCli } from "../../src/cli/program";
+import { createAttachmentService } from "../../src/app/attachments";
+import { createSnippetService } from "../../src/app/snippets";
+import { openVaultDatabase } from "../../src/storage/sqlite";
 
 describe("attachment service", () => {
   let tempRoot: string;

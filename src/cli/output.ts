@@ -1,4 +1,4 @@
-import { CacheError } from "@/shared/errors";
+import { CacheError } from "../shared/errors";
 
 export type OutputFormat = "human" | "json" | "jsonl";
 

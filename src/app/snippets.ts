@@ -1,8 +1,8 @@
-import type { CreateSnippetInput, ListSnippetsInput, UpdateSnippetInput } from "@/shared/types";
-import { createNotFoundError, createValidationError } from "@/shared/errors";
-import { normalizeTags } from "@/shared/tags";
-import type { VaultDatabase } from "@/storage/sqlite";
-import { createSnippetRepository } from "@/storage/sqlite";
+import type { CreateSnippetInput, ListSnippetsInput, UpdateSnippetInput } from "../shared/types";
+import { createNotFoundError, createValidationError } from "../shared/errors";
+import { normalizeTags } from "../shared/tags";
+import type { VaultDatabase } from "../storage/sqlite";
+import { createSnippetRepository } from "../storage/sqlite";
 
 function requireValue(value: string, message: string) {
   if (!value.trim()) {

@@ -3,7 +3,7 @@ import path from "node:path";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { PassThrough } from "node:stream";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { runCli } from "@/cli/program";
+import { runCli } from "../../src/cli/program";
 
 describe("cli program", () => {
   let tempRoot: string;
@@ -393,7 +393,7 @@ describe("cli program", () => {
     const stdoutSpy = vi.spyOn(process.stdout, "write").mockReturnValue(true);
     const stderrSpy = vi.spyOn(process.stderr, "write").mockReturnValue(true);
     const originalIsTTY = process.stdout.isTTY;
-    const { main } = await import("@/index");
+    const { main } = await import("../../src/index");
 
     Object.defineProperty(process.stdout, "isTTY", {
       value: false,
@@ -416,7 +416,7 @@ describe("cli program", () => {
   it("prints help through the public main entrypoint", async () => {
     const stdoutSpy = vi.spyOn(process.stdout, "write").mockReturnValue(true);
     const stderrSpy = vi.spyOn(process.stderr, "write").mockReturnValue(true);
-    const { main } = await import("@/index");
+    const { main } = await import("../../src/index");
 
     await main(["node", "cache", "help"]);
 

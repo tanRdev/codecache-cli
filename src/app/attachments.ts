@@ -1,16 +1,16 @@
 import path from "node:path";
 import { stat } from "node:fs/promises";
-import { createNotFoundError } from "@/shared/errors";
-import { guessMimeType } from "@/shared/mime";
-import type { VaultDatabase } from "@/storage/sqlite";
-import { createAttachmentRepository, createSnippetRepository } from "@/storage/sqlite";
+import { createNotFoundError } from "../shared/errors";
+import { guessMimeType } from "../shared/mime";
+import type { VaultDatabase } from "../storage/sqlite";
+import { createAttachmentRepository, createSnippetRepository } from "../storage/sqlite";
 import {
   buildAttachmentRelativePath,
   deleteAttachmentFile,
   deleteSnippetAttachmentDirectory,
   exportAttachmentFile,
   importAttachmentFile,
-} from "@/storage/attachment-files";
+} from "../storage/attachment-files";
 
 interface AttachmentServiceDependencies {
   attachmentRepository: ReturnType<typeof createAttachmentRepository>;

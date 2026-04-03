@@ -2,8 +2,8 @@ import os from "node:os";
 import path from "node:path";
 import { mkdtemp, rm } from "node:fs/promises";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { createSnippetService } from "@/app/snippets";
-import { openVaultDatabase } from "@/storage/sqlite";
+import { createSnippetService } from "../../src/app/snippets";
+import { openVaultDatabase } from "../../src/storage/sqlite";
 
 describe("sqlite storage", () => {
   let tempRoot: string;

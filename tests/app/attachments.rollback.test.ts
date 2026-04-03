@@ -2,11 +2,11 @@ import os from "node:os";
 import path from "node:path";
 import { access, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { createAttachmentService } from "@/app/attachments";
-import { createSnippetService } from "@/app/snippets";
-import { buildAttachmentRelativePath } from "@/storage/attachment-files";
-import { guessMimeType } from "@/shared/mime";
-import { openVaultDatabase } from "@/storage/sqlite";
+import { createAttachmentService } from "../../src/app/attachments";
+import { createSnippetService } from "../../src/app/snippets";
+import { buildAttachmentRelativePath } from "../../src/storage/attachment-files";
+import { guessMimeType } from "../../src/shared/mime";
+import { openVaultDatabase } from "../../src/storage/sqlite";
 
 describe("attachment rollback", () => {
   let tempRoot: string;
@@ -35,7 +35,7 @@ describe("attachment rollback", () => {
     const attachments = createAttachmentService(db, {
       attachmentRepository: {
         ...(
-          await import("@/storage/sqlite")
+          await import("../../src/storage/sqlite")
         ).createAttachmentRepository(db),
         create() {
           throw new Error("db insert failed");
@@ -59,7 +59,7 @@ describe("attachment rollback", () => {
 
     const attachmentId = crypto.randomUUID();
     const relativePath = buildAttachmentRelativePath(created.id, attachmentId, path.basename(filePath));
-    const repository = (await import("@/storage/sqlite")).createAttachmentRepository(db);
+    const repository = (await import("../../src/storage/sqlite")).createAttachmentRepository(db);
     repository.create({
       id: attachmentId,
       snippetId: created.id,

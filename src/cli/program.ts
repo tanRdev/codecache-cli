@@ -1,11 +1,11 @@
 import path from "node:path";
 import { readFile } from "node:fs/promises";
-import { printError, printSuccess, resolveOutputFormat } from "@/cli/output";
-import { createVaultDatabase, isVaultInitialized, openVaultDatabase } from "@/storage/sqlite";
-import { createSnippetService } from "@/app/snippets";
-import { resolveVaultPath, saveDefaultVault } from "@/app/vault";
-import { createAttachmentService } from "@/app/attachments";
-import { CacheError, createIoError, createValidationError } from "@/shared/errors";
+import { printError, printSuccess, resolveOutputFormat } from "./output";
+import { createVaultDatabase, isVaultInitialized, openVaultDatabase } from "../storage/sqlite";
+import { createSnippetService } from "../app/snippets";
+import { resolveVaultPath, saveDefaultVault } from "../app/vault";
+import { createAttachmentService } from "../app/attachments";
+import { CacheError, createIoError, createValidationError } from "../shared/errors";
 import type {
   CommandFailure,
   CommandResult,
@@ -13,8 +13,8 @@ import type {
   CreateSnippetInput,
   ListSnippetsInput,
   UpdateSnippetInput,
-} from "@/shared/types";
-import { resolvePath } from "@/shared/paths";
+} from "../shared/types";
+import { resolvePath } from "../shared/paths";
 
 interface ParsedArgs {
   flags: Map<string, string[]>;
