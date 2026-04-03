@@ -4,6 +4,7 @@ set -euo pipefail
 
 REPO="tanRdev/codecache-cli"
 INSTALL_DIR="${CODECACHE_INSTALL_DIR:-$HOME/.local/bin}"
+LIB_DIR="${CODECACHE_LIB_DIR:-$HOME/.local/share/codecache-cli}"
 TMP_DIR="$(mktemp -d)"
 
 cleanup() {
@@ -29,6 +30,7 @@ if ! node -e 'const [major, minor] = process.versions.node.split(".").map(Number
 fi
 
 mkdir -p "$INSTALL_DIR"
+mkdir -p "$LIB_DIR"
 
 RELEASE_JSON="$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest")"
 TARBALL_URL="$(printf '%s' "$RELEASE_JSON" | node -e 'const fs = require("fs"); const release = JSON.parse(fs.readFileSync(0, "utf8")); const asset = release.assets.find((item) => item.name.endsWith(".tgz")); if (!asset) process.exit(1); process.stdout.write(asset.browser_download_url);')"
@@ -40,16 +42,20 @@ fi
 
 ARCHIVE_PATH="$TMP_DIR/codecache-cli.tgz"
 PACKAGE_DIR="$TMP_DIR/package"
+TARGET_DIR="$LIB_DIR/package"
 
 curl -fsSL "$TARBALL_URL" -o "$ARCHIVE_PATH"
 tar -xzf "$ARCHIVE_PATH" -C "$TMP_DIR"
+rm -rf "$TARGET_DIR"
+mv "$PACKAGE_DIR" "$TARGET_DIR"
 
 cat > "$INSTALL_DIR/cache" <<EOF
 #!/usr/bin/env bash
-node "$PACKAGE_DIR/bin/cache.js" "\$@"
+node "$TARGET_DIR/bin/cache.js" "\$@"
 EOF
 
 chmod +x "$INSTALL_DIR/cache"
 
 printf 'Installed cache to %s/cache\n' "$INSTALL_DIR"
+printf 'Installed package files to %s\n' "$TARGET_DIR"
 printf 'Ensure %s is on your PATH\n' "$INSTALL_DIR"
