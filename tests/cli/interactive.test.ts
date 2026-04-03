@@ -105,4 +105,36 @@ describe("interactive shell behavior", () => {
 
     promptSpy.mockRestore();
   });
+
+  it("supports interactive init when no vault path is provided", async () => {
+    const promptModule = await import("../../src/cli/interactive");
+    const interactiveVault = path.join(tempRoot, "interactive-vault");
+    const promptSpy = vi.spyOn(promptModule, "createPromptSession").mockReturnValue({
+      ask: vi.fn().mockResolvedValue(interactiveVault),
+      askMultiline: vi.fn(),
+      choose: vi.fn(),
+      confirm: vi.fn().mockResolvedValue(true),
+      write: vi.fn(),
+      close: vi.fn(),
+    });
+
+    const originalStdoutIsTTY = process.stdout.isTTY;
+    const originalStdinIsTTY = process.stdin.isTTY;
+    Object.defineProperty(process.stdout, "isTTY", { value: true, configurable: true });
+    Object.defineProperty(process.stdin, "isTTY", { value: true, configurable: true });
+
+    try {
+      const result = await runCli(["init"]);
+
+      expect(result.ok).toBe(true);
+      if (result.ok) {
+        expect(result.data).toMatchObject({ vaultPath: interactiveVault, default: true });
+      }
+    } finally {
+      Object.defineProperty(process.stdout, "isTTY", { value: originalStdoutIsTTY, configurable: true });
+      Object.defineProperty(process.stdin, "isTTY", { value: originalStdinIsTTY, configurable: true });
+    }
+
+    promptSpy.mockRestore();
+  });
 });

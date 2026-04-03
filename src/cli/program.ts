@@ -141,6 +141,30 @@ async function requireVault(args: ParsedArgs) {
 async function handleInit(args: ParsedArgs) {
   const explicitVault = getFlag(args, "vault");
 
+  if (!explicitVault && isInteractiveSession()) {
+    const prompt = createPromptSession();
+
+    try {
+      const suggestedVault = resolvePath("./.codecache");
+      const vaultPath = resolvePath(await prompt.ask("Vault path", suggestedVault));
+      const setDefault = await prompt.confirm("Save as default vault", true);
+
+      createVaultDatabase(vaultPath);
+
+      if (setDefault) {
+        await saveDefaultVault(vaultPath);
+      }
+
+      return {
+        vaultPath,
+        created: true,
+        default: setDefault,
+      };
+    } finally {
+      prompt.close();
+    }
+  }
+
   if (!explicitVault) {
     throw createValidationError("`cache init` requires --vault PATH");
   }
