@@ -23,7 +23,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "verify": "npm run typecheck && npm run test && npm run build"
+    "verify": "node -e \"require('node:child_process').execSync('tsc --noEmit -p tsconfig.json && vitest run && tsc -p tsconfig.json', { stdio: 'inherit' })\""
   },
   "dependencies": {},
   "devDependencies": {
