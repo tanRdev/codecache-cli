@@ -31,6 +31,23 @@ npm install -g codecache-cli
 
 After install, the command is `cache`.
 
+Alternative install paths:
+
+### Homebrew
+
+```bash
+brew tap tanRdev/tap
+brew install codecache-cli
+```
+
+### Curl installer
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/tanRdev/codecache-cli/main/scripts/install.sh | bash
+```
+
+The installer downloads the latest GitHub release tarball and installs `cache` into `~/.local/bin` by default.
+
 ## Quick Start
 
 Initialize a vault and save it as the default:
@@ -156,6 +173,12 @@ npm test
 npm run typecheck
 npm run build
 ```
+
+## Distribution
+
+- npm package: `codecache-cli`
+- Homebrew formula: `tanRdev/tap/codecache-cli`
+- GitHub releases: binary-installable tarball assets
 
 ## License
 
