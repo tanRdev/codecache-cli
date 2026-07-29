@@ -1,7 +1,7 @@
 {
   "name": "codecache-cli",
   "version": "0.1.3",
-  "description": "Local-first CLI for storing and retrieving code snippets.",
+  "description": "Deprecated standalone CLI; development moved to tanRdev/codecache.",
   "license": "MIT",
   "bin": {
     "cache": "./bin/cache.js"
